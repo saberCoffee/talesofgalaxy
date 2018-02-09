@@ -40,61 +40,25 @@
             <div class="row">
 
                 <div class="body" id="post-{{ post.id }}">
-                    <header
-                    {% if character %}
-                        {% if post.character.group %}
-                            class="faction-{{ post.character.group.abreviation }}-border"
-                        {% else %}
-                            class="faction-default-border"
-                        {% endif %}
-                    {% else %}
-                        {% if post.user.group %}
-                            class="faction-{{ post.user.group.abreviation }}-border"
-                        {% else %}
-                            class="faction-default-border"
-                        {% endif %}
-                    {% endif %}
-                    ">
+                    <header class="faction-default-border">
                         <div class="avatar">
                             <a href="{{ path('viewprofile', {'userId': post.user.id}) }}">
                             {% if avatar %}
                                 {% if character %}
-                                    <img src="{{ asset('uploads/characters/avatars/' ~ avatar) }}" width="150px" height="150px" alt="Avatar de {{ post.user.username }}" class="faction-{{ post.character.group.abreviation }}-border" />
+                                    <img src="{{ asset('uploads/characters/avatars/' ~ avatar) }}" width="150px" height="150px" alt="Avatar de {{ post.user.username }}" class="faction-default-border" />
                                 {% else %}
-                                    <img src="{{ asset('uploads/users/avatars/' ~ avatar) }}" width="150px" height="150px" alt="Avatar de {{ post.user.username }}"
-                                    {% if post.user.group %}
-                                        class="faction-{{ post.user.group.abreviation }}-border"
-                                    {% else %}
-                                        class="faction-default-border"
-                                    {% endif %}
-                                    />
+                                    <img src="{{ asset('uploads/users/avatars/' ~ avatar) }}" width="150px" height="150px" alt="Avatar de {{ post.user.username }}" class="faction-default-border" />
                                 {% endif %}
                             {% else %}
-                                <img src="{{ asset('img/avatars/no_avatar.jpg') }}" width="150px" height="150px" alt="Avatar manquant"
-                                {% if post.user.group %}
-                                    class="faction-{{ post.user.group.abreviation }}-border"
-                                {% else %}
-                                    class="faction-default-border"
-                                {% endif %}
-                                />
+                                <img src="{{ asset('img/avatars/no_avatar.jpg') }}" width="150px" height="150px" alt="Avatar manquant" class="faction-default-border"/>
                             {% endif %}
                             </a>
                         </div>
 
                         {% if character %}
-                            <a href="{{ path('viewcharacter', {'characterId': character.id}) }}" class="poster-name
-                            {% if character.group %}
-                            faction-{{ character.group.abreviation }}
-                            {% endif %}
-                            ">{{ character.name }}</a>
+                            <a href="{{ path('viewcharacter', {'characterId': character.id}) }}" class="poster-name">{{ character.name }}</a>
                         {% else %}
-                            <a href="{{ path('viewprofile', {'userId': post.user.id}) }}" class="poster-name
-                            {% if post.user.group %}
-                                faction-{{ post.user.group.abreviation }}
-                            {% else %}
-                                faction-default"
-                            {% endif %}
-                            ">{{ post.user.username }}</a>
+                            <a href="{{ path('viewprofile', {'userId': post.user.id}) }}" class="poster-name faction-default">{{ post.user.username }}</a>
                         {% endif %}
                     </header>
 
@@ -114,29 +78,25 @@
                         <h2>
                             <a href="{{ path('viewtopic', {'topicId': topicData.id, 'cleanTitle': topicData.cleanTitle}) }}#post-{{ post.id}}">{% if loop.index0 > 0 %}Re: {% endif %}{{ topicData.title }}</a>
                         </h2>
-                        par {% if character %}<a href="{{ path('viewcharacter', {'characterId': character.id}) }}" class="poster-name{% if character.group %} faction-{{ character.group.abreviation }}{% endif %}">{{ character.name }}</a> ({% endif %}<a href="{{ path('viewprofile', {'userId': post.user.id}) }}" class="poster-name
-                        {% if post.user.group %}
-                            faction-{{ post.user.group.abreviation }}
-                        {% endif %}">{{ post.user.username }}</a>{% if character %}){% endif %}, le {{ post.postDate|localizeddate('full', 'medium', app.request.locale ) }}
+                        par {% if character %}<a href="{{ path('viewcharacter', {'characterId': character.id}) }}" class="poster-name">{{ character.name }}</a> ({% endif %}<a href="{{ path('viewprofile', {'userId': post.user.id}) }}" class="poster-name">{{ post.user.username }}</a>{% if character %}){% endif %}, le {{ post.postDate|localizeddate('full', 'medium', app.request.locale ) }}
                     </div>
 
                     <div class="content">
                         {% if loop.first %}
                             {% if topicData.forum.name == 'Créer votre personnage' %}
                                 {% if character %}
-                                <strong class="faction-{{ character.group.abreviation }}">Prénom</strong> {{ character.firstname }}<br />
-                                <strong class="faction-{{ character.group.abreviation }}">Nom</strong> {{ character.lastname }}<br />
-                                <strong class="faction-{{ character.group.abreviation }}">Surnom</strong> {{ character.surname }}<br />
-                                <strong class="faction-{{ character.group.abreviation }}">Genre</strong> {% if character.gender == 'f' %}Féminin{% elseif character.gender == 'm' %}Masculin{% else %}Indéfini{% endif %}<br />
-                                <strong class="faction-{{ character.group.abreviation }}">Espèce</strong> {{ character.species }}<br /><br />
-                                <strong class="faction-{{ character.group.abreviation }}">Âge et date de naissance</strong> {{ 220 - character.birthdate}} ans, né{{e}} en {{ character.birthdate }}<br />
-                                <strong class="faction-{{ character.group.abreviation }}">Monde natal</strong> {{ character.homeworld }}<br />
-                                <strong class="faction-{{ character.group.abreviation }}">Groupe</strong> {{ character.group.name }}<br />
-                                <strong class="faction-{{ character.group.abreviation }}">Rang</strong> {{ character.rank }}<br />
-                                <strong class="faction-{{ character.group.abreviation }}">Niveau de personnage</strong> {{ character.level }}<br /><br />
-                                <strong class="faction-{{ character.group.abreviation }}">Description physique</strong><br /><br />{{ character.physical|bbcode|raw|nl2br }}<br /><br />
-                                <strong class="faction-{{ character.group.abreviation }}">Description mentale</strong><br /><br />{{ character.mental|bbcode|raw|nl2br }}<br /><br />
-                                <strong class="faction-{{ character.group.abreviation }}">Histoire</strong><br /><br />
+                                <strong>Prénom</strong> {{ character.firstname }}<br />
+                                <strong>Nom</strong> {{ character.lastname }}<br />
+                                <strong>Surnom</strong> {{ character.surname }}<br />
+                                <strong>Genre</strong> {% if character.gender == 'f' %}Féminin{% elseif character.gender == 'm' %}Masculin{% else %}Indéfini{% endif %}<br />
+                                <strong>Espèce</strong> {{ character.species }}<br /><br />
+                                <strong>Âge et date de naissance</strong> {{ 220 - character.birthdate}} ans, né{{e}} en {{ character.birthdate }}<br />
+                                <strong>Monde natal</strong> {{ character.homeworld }}<br />
+                                <strong>Rang</strong> {{ character.rank }}<br />
+                                <strong>Niveau de personnage</strong> {{ character.level }}<br /><br />
+                                <strong>Description physique</strong><br /><br />{{ character.physical|bbcode|raw|nl2br }}<br /><br />
+                                <strong>Description mentale</strong><br /><br />{{ character.mental|bbcode|raw|nl2br }}<br /><br />
+                                <strong>Histoire</strong><br /><br />
                                 {% endif %}
                             {% endif %}
                         {% endif %}

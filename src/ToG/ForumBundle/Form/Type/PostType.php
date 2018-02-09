@@ -33,7 +33,7 @@ class PostType extends AbstractType
         }
 
         if ($options['new_character']) {
-            $builder->add('character', \ToG\RolePlayBundle\Form\Type\CharacterType::class, array('groups' => $options['groups']));
+            $builder->add('character', \ToG\RolePlayBundle\Form\Type\CharacterType::class);
         }
     }
 
@@ -42,8 +42,7 @@ class PostType extends AbstractType
         $resolver->setDefaults(array(
             'data_class'    => Post::class,
             'new_topic'     => false,
-            'new_character' => false,
-            'groups'        => false
+            'new_character' => false
         ));
     }
 }

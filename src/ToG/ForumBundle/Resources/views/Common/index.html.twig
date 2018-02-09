@@ -76,21 +76,4 @@
     </div>
 
 </div><!-- /.div row -->
-
-<div class="row">
-
-    <div class="legend">
-
-        <ul>
-            {% for group in groups %}
-                <li class="faction-{{ group.abreviation }}-border-hover">
-                    <a href="#" style="color: #{{ group.colour }}"><strong>{{ group.name }}</strong></a>
-                    ({{ group.members|length }})
-                </li>
-            {% endfor %}
-        </ul>
-
-    </div><!-- ./div legend -->
-
-</div><!-- /.div row -->
 {% endblock %}

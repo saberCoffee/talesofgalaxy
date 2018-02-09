@@ -29,12 +29,6 @@ class Character
     protected $user;
 
     /**
-      * @ORM\ManyToOne(targetEntity="\ToG\RolePlayBundle\Entity\Group", inversedBy="characters")
-      * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
-     */
-    protected $group;
-
-    /**
      * @ORM\OneToMany(targetEntity="\ToG\ForumBundle\Entity\Post", mappedBy="character")
      */
     protected $posts;
@@ -639,29 +633,5 @@ class Character
     public function getAvatar()
     {
         return $this->avatar;
-    }
-
-    /**
-     * Get the value of Group
-     *
-     * @return mixed
-     */
-    public function getGroup()
-    {
-        return $this->group;
-    }
-
-    /**
-     * Set the value of Group
-     *
-     * @param mixed group
-     *
-     * @return self
-     */
-    public function setGroup($group)
-    {
-        $this->group = $group;
-
-        return $this;
     }
 }

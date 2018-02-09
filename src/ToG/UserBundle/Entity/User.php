@@ -107,19 +107,6 @@ class User implements UserInterface, \Serializable
     private $avatar;
 
     /**
-     * @ORM\OneToMany(targetEntity="\ToG\RolePlayBundle\Entity\UserGroupAssociation", mappedBy="user")
-     */
-    protected $user_group_associations;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="\ToG\RolePlayBundle\Entity\Group", inversedBy="activeUsers")
-     * @ORM\JoinColumn(name="active_group_id", referencedColumnName="id")
-     *
-     * Un utilisateur peut avoir plusieurs groupes, mais il n'y en a qu'un qui est considéré "actif"
-     */
-    protected $activeGroup;
-
-    /**
      * @ORM\OneToMany(targetEntity="\ToG\RolePlayBundle\Entity\Character", mappedBy="user", fetch="EAGER")
      */
     protected $characters;
@@ -128,14 +115,6 @@ class User implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="\ToG\ForumBundle\Entity\Post", mappedBy="user", fetch="EAGER")
      */
     protected $posts;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->user_group_associations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
@@ -426,39 +405,6 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Add user_group_associations
-     *
-     * @param \ToG\RolePlayBundle\Entity\UserGroupAssociation $user_group_associations
-     * @return User
-     */
-    public function addUserGroupAssociation(\ToG\RolePlayBundle\Entity\UserGroupAssociation $user_group_associations)
-    {
-        $this->user_group_associations[] = $user_group_associations;
-
-        return $this;
-    }
-
-    /**
-     * Remove user_group_associations
-     *
-     * @param \ToG\RolePlayBundle\Entity\UserGroupAssociation $user_group_associations
-     */
-    public function removeUserGroupAssociation(\ToG\RolePlayBundle\Entity\UserGroupAssociation $user_group_associations)
-    {
-        $this->user_group_associations->removeElement($user_group_associations);
-    }
-
-    /**
-     * Get user_group_associations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUserGroupAssociations()
-    {
-        return $this->user_group_associations;
-    }
-
-    /**
      * Add post
      *
      * @param \ToG\ForumBundle\Entity\Post $post
@@ -533,30 +479,6 @@ class User implements UserInterface, \Serializable
     public function getCharactersCount()
     {
         return $this->characters_count;
-    }
-
-    /**
-     * Set activeGroup
-     *
-     * @param \ToG\RolePlayBundle\Entity\Group $activeGroup
-     *
-     * @return Post
-     */
-    public function setGroup(\ToG\RolePlayBundle\Entity\Group $activeGroup = null)
-    {
-        $this->activeGroup = $activeGroup;
-
-        return $this;
-    }
-
-    /**
-     * Get activeGroup
-     *
-     * @return \ToG\RolePlayBundle\Entity\Group
-     */
-    public function getGroup()
-    {
-        return $this->activeGroup;
     }
 
     public function serialize()
