@@ -11,7 +11,7 @@ tog_user:
     prefix:   /
 
 login:
-    path: /login
+    path: /connexion
     defaults:
         _controller: ToGUserBundle:Security:login
 
@@ -19,4 +19,4 @@ login_check:
     path: /login_check
 
 logout:
-    path: /logout
+    path: /deconnexion

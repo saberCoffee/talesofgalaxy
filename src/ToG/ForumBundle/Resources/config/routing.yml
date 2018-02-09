@@ -10,13 +10,13 @@ viewforum:
         forumId: '\d+'
 
 viewtopic:
-    path:     /topic-{topicId}/{cleanTitle}
+    path:     /sujet-{topicId}/{cleanTitle}
     defaults: { _controller: ToGForumBundle:Common:viewTopic }
     requirements:
         topicId: '\d+'
 
 editpost:
-    path:   /posting/post-{postId}
+    path:   /editer/message-{postId}
     defaults: { _controller: ToGForumBundle:Common:editPost }
 
 # Admin

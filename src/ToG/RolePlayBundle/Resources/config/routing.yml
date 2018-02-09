@@ -1,11 +1,15 @@
+createcharacter:
+    path:     /creer-un-personnage
+    defaults: { _controller: ToGRolePlayBundle:Character:createCharacter }
+
 viewcharacter:
-    path:     /character-{characterId}
+    path:     /personnage-{characterId}
     defaults: { _controller: ToGRolePlayBundle:Character:viewCharacter }
     requirements:
         characterId: '\d+'
 
 editcharacter:
-    path:     /character-{characterId}/edit
+    path:     /personnage-{characterId}/edit
     defaults: { _controller: ToGRolePlayBundle:Character:editCharacter }
     requirements:
         characterId: '\d+'

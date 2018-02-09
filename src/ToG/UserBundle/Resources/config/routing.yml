@@ -1,15 +1,15 @@
 register:
-    path:     /register
+    path:     /inscription
     defaults: { _controller: ToGUserBundle:Registration:register }
 
 viewprofile:
-    path:     /user-{userId}
+    path:     /profil-{userId}
     defaults: { _controller: ToGUserBundle:User:viewprofile }
     requirements:
         userId: '\d+'
 
 editprofile:
-    path:     /user-{userId}/edit
+    path:     /profil-{userId}/edit
     defaults: { _controller: ToGUserBundle:User:editprofile }
     requirements:
         userId: '\d+'

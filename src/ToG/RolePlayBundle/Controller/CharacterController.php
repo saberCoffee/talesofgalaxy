@@ -8,17 +8,31 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class CharacterController extends Controller
-{
-    public function updateAvatarByAjaxAction(Request $request) {
-        // $avatar = new UploadedFile($_FILES['avatar'], $_FILES['avatar']['name']);
+{    
+    /**
+    * Page de création d'un personnage
+    *
+    * @param  Request    $request     L'objet request
+    *
+    * @return view
+    */
+    public function createCharacterAction(Request $request)
+    {
 
-        // $data = $_FILES['avatar'];
+        return $this->render('ToGRolePlayBundle:Character:create.html.twig', array(
+            // Titre de la page
+            'pageTitle' => 'Créer un personnage'
+        ));
+    }
+
+    public function updateAvatarByAjaxAction(Request $request) 
+    {
         $avatar = $request->files->get('avatar');
 
-        $x   = $_POST['x'];
-        $y   = $_POST['y'];
-        $w   = $_POST['w'];
-        $h   = $_POST['h'];
+        $x = $_POST['x'];
+        $y = $_POST['y'];
+        $w = $_POST['w'];
+        $h = $_POST['h'];
 
         $avatar_directory = $this->container->getParameter('characters_avatars_directory');
         $avatar_name = $this->get('app.characters_avatar_uploader')->upload($avatar);

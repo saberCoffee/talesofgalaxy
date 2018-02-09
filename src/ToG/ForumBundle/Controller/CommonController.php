@@ -89,11 +89,10 @@ class CommonController extends Controller
         $forum = $forumRepository->find($forumId);
 
         $topicRepository = $em->getRepository('ToGForumBundle:Topic');
-        $topics = $topicRepository
-            ->findBy(
-                array('forum' => $forum),
-                array('type' => 'DESC', 'lastPostDate' => 'DESC')
-            );
+        $topics = $topicRepository->findBy(
+            ['forum' => $forum],
+            ['type' => 'DESC', 'lastPostDate' => 'DESC']
+        );
 
         foreach ($topics as $topic) {
             $posts = $topic->getPosts();

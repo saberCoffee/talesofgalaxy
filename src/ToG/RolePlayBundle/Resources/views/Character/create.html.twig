@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('modules/character_creation/main.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<main>
+    <div class="container">
+
+        <div class="row">
+            <header>
+                <h2>{{ pageTitle }}</h2>
+            </header>
+        </div><!-- /.div row -->
+
+        <div class="row">
+           <div id="createCharacterApp"></div>
+        </div><!-- /.div row -->
+
+    </div><!-- /.div container -->
+</main>
+{% endblock %}
