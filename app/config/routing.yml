@@ -1,0 +1,22 @@
+tog_forum:
+    resource: "@ToGForumBundle/Resources/config/routing.yml"
+    prefix:   /
+
+tog_role_play:
+    resource: "@ToGRolePlayBundle/Resources/config/routing.yml"
+    prefix:   /
+
+tog_user:
+    resource: "@ToGUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+login:
+    path: /login
+    defaults:
+        _controller: ToGUserBundle:Security:login
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout

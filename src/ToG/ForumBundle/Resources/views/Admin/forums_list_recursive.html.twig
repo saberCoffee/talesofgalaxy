@@ -1,0 +1,13 @@
+{% for forum in forums %}
+    <tr class="depth-{{ depth }}">
+        <td>
+            <a href="{{ path('forum_management', {'forumId': forum.id, 'cleanName': forum.cleanName}) }}"><span class="glyphicon glyphicon-cog"></span></a>
+            {% if forum.subForums %}<a href="#" class="deploy"><span class="glyphicon glyphicon-option-vertical"></span></a>{% endif %}
+        </td>
+        <td>{% for i in range(0, depth - 1) %}_ {% endfor %}&nbsp;{{ forum.name }}</td>
+    </tr>
+
+    {% if forum.subForums %}
+        {{ include('ToGForumBundle:Admin:forums_list_recursive.html.twig', {'forums': forum.subForums, 'depth': depth + 1}) }}
+    {% endif %}
+{% endfor %}

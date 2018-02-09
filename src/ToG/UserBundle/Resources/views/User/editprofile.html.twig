@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% form_theme form 'ToGForumBundle:Form:fields.html.twig' %}
+
+<main id="page-editprofile">
+
+    <div class="container">
+
+        <div class="row">
+
+            <header>
+
+                <h2>{{ pageTitle }}</h2>
+
+            </header>
+
+        </div><!-- /.div row -->
+
+        <div class="row">
+
+            <ul class="tabsSystem">
+                {% spaceless %}
+                    <li class="current" data-target="panel-profile"><span class="glyphicon glyphicon-user"></span> Profil</li>
+                    <li data-target="panel-prefs"><span class="glyphicon glyphicon-cog"></span> Préférences</li>
+                    <li data-target="panel-inbox"><span class="glyphicon glyphicon-envelope"></span> Messagerie privée</li>
+                    <li></li>
+                {% endspaceless %}
+            </ul>
+
+            <div class="body">
+
+                {{ form_start(form, { 'attr': {'class': 'form-display1'} }) }}
+                <div class="togPanel active" id="panel-profile">
+
+                        {{ form_row(form.username) }}
+                        {{ form_row(form.email) }}
+
+                        <div class="avatarbox">
+                            {% if userData.avatar %}
+                                <img src="{{ asset('uploads/users/avatars/' ~ userData.avatar) }}" width="150px" height="150px" alt="Avatar de {{ userData.username }}" id="avatar" />
+                            {% else %}
+                                <img src="{{ asset('img/avatars/no_avatar.jpg') }}" width="150px" height="150px" alt="Avatar manquant" />
+                            {% endif %}
+
+                            {{ form_label(form.avatar) }} <span class="glyphicon glyphicon-upload label-glyph"></span>
+
+                            <div class="help-block"><span class="glyphicon glyphicon-info-sign"></span> Dimensions requises: 150px de hauteur, 150px de largeur</div>
+
+                            {{ form_widget(form.avatar, { 'attr': {'class': 'form-control'} }) }}
+
+                            {{ form_errors(form.avatar) }}
+                        </div>
+
+                        {{ form_row(form.newPlainPassword.first) }}
+                        {{ form_row(form.newPlainPassword.second) }}
+                        {{ form_row(form.password) }}
+                        <div class="help-block"><span class="glyphicon glyphicon-info-sign"></span> Pour modifier votre mot de passe, vous devez saisir votre mot de passe actuel.</div>
+                </div>
+
+                <div class="togPanel" id="panel-prefs">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad min
+
+                    <div class="avatar">
+                        <img src="{{ asset('img/avatars/avatar_' ~ random(6) ~ '.jpg') }}" width="150px" height="150px" alt="Avatar de {{ userData.username }}" />
+                    </div>
+                </div>
+
+                {{ form_end(form) }}
+
+            </div><!-- /.div body -->
+
+        </div><!-- /.div row -->
+
+    </div><!-- /.div container -->
+
+</main>
+{% endblock %}

@@ -1,0 +1,658 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Roboto+Condensed|Electrolize');
+@import 'vars.scss';
+
+@font-face {
+    font-family: "Aurebesh";
+    src: url("../../fonts/Aurebesh Bold Italic.ttf");
+}
+@font-face {
+    font-family: "StarWars";
+    src: url("../../fonts/Starjedi.ttf");
+}
+
+/*
+Helpers
+*/
+.r-m {
+    margin: 0;
+}
+
+.r-p {
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3 {
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+}
+
+p {
+    padding: 0 1rem;
+}
+
+/*
+Helpers RP
+*/
+.faction-rg {
+    color: #ec6216;
+}
+.faction-ci {
+    color: #5d5066;
+}
+.faction-conf {
+    color: #e90707;
+}
+.faction-jedi {
+    color: #1675B7;
+}
+.faction-sith {
+    color: #8F2C15;
+}
+.faction-res {
+    color: #7C7C7C;
+}
+.faction-inde {
+    color: #5B8D4D;
+}
+
+.border-faction-rg {
+    border-color: #ec6216;
+}
+.border-faction-ci {
+    border-color: #5d5066;
+}
+.border-faction-conf {
+    border-color: #e90707;
+}
+.border-faction-jedi {
+    border-color: #1675B7;
+}
+.border-faction-sith {
+    border-color: #8F2C15;
+}
+.border-faction-res {
+    border-color: #7C7C7C;
+}
+.border-faction-inde {
+    border-color: #5B8D4D;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    background-color: #131313;
+    background-image: url("../../img/main_bg.jpg");
+    background-repeat: no-repeat;
+    background-position: 75% -50%;
+    background-attachment: fixed;
+
+    color: $main-color;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.4rem;
+}
+
+main {
+    margin: 0;
+}
+
+.arianePath {
+    margin: 0;
+    padding: 0;
+
+    li {
+        display: inline-block;
+        border: 0;
+        margin: 0 0.5em;
+
+        a {
+            color: $yellow;
+            font-family: "Roboto", sans-serif;
+            text-decoration: none;
+
+            &:hover {
+                color: #fff;
+            }
+        }
+
+        &:last-of-type {
+            a {
+                color: #fff;
+            }
+        }
+    }
+}
+
+.page-controls {
+    width: 30%;
+
+    line-height: 40px;
+    text-align: right;
+}
+
+/*
+Header
+*/
+body > header {
+    height: 375px;
+
+    margin-bottom: 2em;
+
+    background-image: url("../../img/jedi2.jpg");
+    // background-attachment: fixed;
+    background-repeat: no-repeat;
+    box-shadow: 3px 3px 10px #0c0d13;
+    background-position: 50% 0%;
+
+    /*
+    Navigation du header
+    */
+    nav#mainNav {
+        height: 50px;
+        margin: 0 auto;
+        background: rgba(42,42,42,0.1);
+        border-bottom: 1px solid rgba(0,0,0,0.3);
+
+        z-index: 99;
+
+        ul {
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+
+            li {
+                display: inline-block;
+                margin: 0 1em;
+
+                line-height: 49px;
+
+                a {
+                    position: relative;
+                    display: block;
+
+                    color: $yellow;
+                    font-family: "Roboto", sans-serif;
+                    font-size: 1.1em;
+                    text-transform: uppercase;
+
+                    &:hover {
+                        // border-bottom: 3px solid $yellow;
+
+                        color: #fff;
+                    }
+
+                    &:hover, &:active, &:focus {
+                        text-decoration: none;
+                    }
+
+                    &:after {
+                        content: '';
+                        display: block;
+                        margin: auto;
+                        height: 3px;
+                        width: 0px;
+                        background: transparent;
+                        transition: width .5s ease, background-color .5s ease;
+                    }
+
+                    &:hover:after {
+                        width: 100%;
+                        background: $yellow;
+                    }
+                }
+            }
+
+            // Liens Connexion/Déconnexion & Inscription
+            &:last-of-type {
+                float: right;
+            }
+        }
+    }
+
+    nav#secondNav {
+        height: 50px;
+        margin: 0 auto;
+        background: rgba(42,42,42,0.1);
+        border-bottom: 1px solid rgba(0,0,0,0.3);
+
+        z-index: 100;
+
+        ul {
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+
+            li {
+                display: inline-block;
+                margin: 0 1em;
+
+                color: #fff;
+                line-height: 49px;
+            }
+
+            &:not(.arianePath) {
+                li {
+                    &:first-of-type {
+                        padding-right: 10px;
+                        border-right: 1px solid rgba(0,0,0,0.3);
+                    }
+                }
+            }
+        }
+    }
+
+    /*
+    Bannière
+    */
+    div.logo {
+        margin: 70px auto auto auto;
+
+        text-align: center;
+
+        img {
+            max-width: 100%;
+        }
+    }
+}
+
+main#page-index, footer {
+    h2 {
+        padding-left: 1rem;
+
+        font-size: 1.5em;
+        text-transform: uppercase;
+    }
+}
+
+/*
+Index, Liste des forums
+*/
+a.forum {
+    display: block;
+    margin: 1rem;
+    padding: 1rem;
+    height: 165px;
+    background: $white-05;
+    border: 1px solid #000;
+    box-shadow: inset 0 0 2px 2px $white-05;
+
+    img.forum-ico {
+        float: left;
+        margin: 15px 20px 0 0;
+        width: 75px;
+        height: 75px;
+        filter: grayscale(0.5);
+    }
+
+    div.forum-desc {
+        margin-left: 95px;
+
+        h3 {
+            margin-top: 15px;
+        }
+
+        p {
+            padding: 0;
+
+            color: $main-color;
+        }
+    }
+
+    &:hover {
+        background: rgba(255,255,255,.1);
+
+        img.forum-ico {
+            filter: grayscale(0);
+        }
+    }
+
+    &:hover, &:focus, &:visited {
+        text-decoration: none;
+    }
+}
+
+/*
+Footer
+*/
+body > footer {
+    width: 100%;
+    height: 200px;
+    margin-top: 2em;
+    padding: 1em 0;
+    background: rgba(0,0,0,0.6);
+    border-top: 1px solid #000d69;
+    box-shadow: 0 -8px 8px 0 rgba(45, 6, 173, 0.05);
+}
+
+/*
+Viewforum
+*/
+main#page-viewforum {
+    /*
+    Bootstrap
+    */
+    .row {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .topicrow {
+        margin-top: 20px;
+
+        .row {
+            display: flex;
+            flex-direction: row;
+
+            margin: 5px -15px;
+            padding: 20px;
+            border: 1px solid #000;
+            box-shadow: inset 0 0 2px 2px $white-05;
+
+            cursor: pointer;
+            transition: margin .3s ease-in;
+
+            .glyphicon {
+                margin-right: 5px;
+
+                color: #000b1b;
+                text-shadow: 0px 0px 2px #2172df, 0px 0px 2px #0c4087;
+            }
+
+            .topic-title {
+                width: 60%;
+
+                a {
+                    color: $yellow;
+                }
+            }
+
+            .topic-responses {
+                width: 10%;
+
+                color: $main-color;
+
+                .glyphicon {
+                    position: relative;
+                    top: 3px;
+                }
+            }
+
+            .topic-author {
+                width: 15%;
+
+                color: $main-color;
+            }
+
+            .topic-date {
+                width: 15%;
+
+                color: $main-color;
+                text-align: right;
+            }
+
+            a {
+                &:active, &:hover, &:visited, &:focus {
+                    text-decoration: none;
+                    outline: none;
+                }
+            }
+
+            &:nth-of-type(odd) {
+                background: rgba(25,25,25,.6);
+            }
+
+            &:nth-of-type(even) {
+                background: rgba(35,35,35,.6);
+            }
+
+            &:hover {
+                background: $white-05;
+
+                .glyphicon {
+                    color: #01142e;
+                }
+
+                div.topic-title {
+                    a {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+
+    #newtopic {
+        display: none;
+    }
+}
+
+/*
+Viewforum &
+Viewtopic &
+Viewprofile &
+Editprofile
+*/
+#page-viewforum,
+#page-viewtopic,
+#page-viewprofile,
+#page-editprofile {
+    header {
+        display: flex;
+        flex-direction: row;
+
+        margin-bottom: 20px;
+
+        h2 {
+            width: 70%;
+            margin: 0;
+
+            font-size: 40px;
+        }
+    }
+
+    div.row {
+        margin: 10px -15px;
+
+        &:nth-of-type(odd) {
+            .body {
+                background: rgba(25,25,25,.6);
+            }
+        }
+
+        &:nth-of-type(even) {
+            .body {
+                background: rgba(35,35,35,.6);
+            }
+        }
+    }
+
+    .post-controls, .profile-controls {
+        float: right;
+
+        .glyphicon {
+            margin: 0 0.2em;
+            padding: 0.5em 1em;
+            background: $black;
+            border-radius: 3px;
+
+            cursor: pointer;
+            transition: all 0.2s ease-out;
+
+            &:hover {
+                background: transparent;
+
+                color: #000b1b;
+                text-shadow: 0px 0px 2px #2172df, 0px 0px 2px #0c4087;
+            }
+        }
+    }
+
+    .body {
+        border: 1px solid #000;
+        box-shadow: inset 0 0 2px 2px $white-05;
+
+        header {
+            position: relative;
+            height: 200px;
+            background: url("../../img/viewtopic/post_header_default.jpg");
+            border-bottom-style: solid;
+            border-bottom-width: 2px;
+            box-shadow: inset 0 0 2px 2px $white-05;
+
+            div.avatar {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                height: 150px;
+                width: 150px;
+
+                img {
+                    border-radius: 50%;
+                    border-style: solid;
+                    border-width: 2px;
+                }
+            }
+
+            span.poster-name {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+
+                font-family: "Electrolize", sans-serif;
+                font-size: 30px;
+                font-weight: bold;
+                text-shadow: 0 0 10px #000;
+                text-transform: uppercase;
+
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .subHeader, .content {
+            font-family: "Roboto Condensed", sans-serif;
+        }
+
+        .subHeader {
+            margin: 20px;
+            margin-bottom: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid $main-color;
+
+            h2 {
+                margin: 0;
+                font-size: 1.2em;
+            }
+
+            span.poster-name {
+                font-weight: bold;
+            }
+        }
+
+        .content {
+            padding: 20px;
+        }
+    }
+}
+
+/*
+Viewprofile
+*/
+main#page-viewprofile {
+    h2 {
+        width: 70%;
+        margin: 0;
+
+        font-size: 40px;
+    }
+
+    .body {
+        header {
+            margin-bottom: 0;
+        }
+    }
+}
+/*
+Posting
+*/
+main#page-posting {
+    .row {
+        margin: 10px -15px;
+    }
+}
+
+/*
+Footer
+*/
+body > footer {
+    height: 200px;
+}
+
+/*
+Systèmes d'onglets
+*/
+.tabsSystem {
+    position: relative;
+    // margin: 0;
+
+    li {
+        position: relative;
+        display: inline-block;
+        height: 45px;
+        padding: 0 20px;
+        border-top: 2px solid transparent;
+        border-bottom: 2px solid $yellow;
+
+        cursor: pointer;
+        font-weight: bold;
+        line-height: 45px;
+        font-size: 1.6rem;
+        font-family: "Electrolize", sans-serif;
+
+        transition: color 0.2s ease-out;
+
+        &.current, &:hover {
+            color: $yellow;
+        }
+
+        &:last-of-type {
+            position: absolute;
+            height: 45px;
+            border: 0;
+            pointer-events: none;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 7px 7px 7px;
+                border-color: transparent transparent $yellow transparent;
+
+                transform: translate(-50%, 0);
+            }
+        }
+
+        .glyphicon {
+            top: 5px;
+            font-family: 'Glyphicons Halflings';
+        }
+    }
+}
+
+.togPanel {
+    &:not(.active) {
+        display: none;
+    }
+}

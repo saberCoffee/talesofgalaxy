@@ -1,0 +1,13 @@
+{% block javascripts %}
+    {% javascripts
+        'vendors/colorpicker/js/colorpicker.js'
+        'js/bbcode.js'
+        output='js/compiled/app.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" media="screen" type="text/css" href="{{ asset('vendors/colorpicker/css/colorpicker.css') }}" />
+    <link rel="stylesheet" media="screen" type="text/css" href="{{ asset('vendors/colorpicker/css/layout.css') }}" />
+{% endblock %}

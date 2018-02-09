@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {% javascripts
+        'js/main.js'
+        'js/avatar.js'
+        'js/admin.js'
+        output='js/compiled/app.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block body %}
+
+{% form_theme form 'ToGForumBundle:Form:fields.html.twig' %}
+
+<main id="page-admin">
+
+    <div class="container">
+
+        <div class="row">
+
+            <table class="table forumslist">
+                <tr>
+                    <th colspan="2">Liste des forums</th>
+                </tr>
+            {% for categorie in categories_and_forums %}
+                {% set depth = 0 %}
+                    <tr class="depth-{{ depth }}">
+                        <td width="60px">
+                            <a href="{{ path('forum_management', {'forumId': categorie.id, 'cleanName': categorie.cleanName}) }}"><span class="glyphicon glyphicon-cog"></span></a>
+                            {% if categorie.subForums %}<a href="#" class="deploy"><span class="glyphicon glyphicon-option-vertical"></span></a>{% endif %}
+                        </td>
+                        <td>
+                            {{ categorie.name }}
+                        </td>
+                    </tr>
+
+                    {% if categorie.subForums %}
+                        {{ include('ToGForumBundle:Admin:forums_list_recursive.html.twig', {'forums': categorie.subForums, 'depth': depth + 1}) }}
+                    {% endif %}
+            {% endfor %}
+            </table>
+
+        </div>
+
+        <div class="row">
+
+            {{ form_start(form, { 'attr': {'class': 'form-display1'} }) }}
+
+            {{ form_end(form) }}
+
+        </div><!-- /.div row -->
+
+    </div><!-- /.div container -->
+
+</main>
+{% endblock %}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <title>{% if pageTitle is defined %}{{ pageTitle }} - {% endif %}Tales of galaxy</title>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        {% block stylesheets %}
+            {% stylesheets
+                'scss/buttons.scss'
+                'scss/common.scss'
+                'scss/bbcode.scss'
+                'scss/forms.scss'
+                filter='scssphp' output='css/compiled/app.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}">
+            {% endstylesheets %}
+        {% endblock %}
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        {% block javascripts %}
+            {% javascripts
+                'js/main.js'
+                output='js/compiled/app.js' %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+        <!-- <link rel="stylesheet" href="css/compiled/app.css" /> -->
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    </head>
+    <body>
+
+        <header>
+
+            <nav id="mainNav">
+
+                <div class="container">
+
+                    <div class="row">
+
+                        {% spaceless %}
+                            <ul><li><a href="{{ path('index') }}">Accueil</a></li>
+                                <li><a href="#">Règles du jeu</a></li>
+                                <li><a href="#">Codex</a></li>
+                                <li><a href="#">Support</a></li>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li><a href="#">Administration</a></li>
+                                {% endif %}
+                            </ul>
+
+                            <ul>
+                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                    <li><a href="{{ path('logout') }}">Déconnexion</a></li>
+                                {% else %}
+                                    <li class="login"><a href="{{ path('login') }}">Connexion</a></li>
+                                    <li class="register"><a href="{{ path('register') }}">Inscription</a></li>
+                                {% endif %}
+                            </ul>
+                        {% endspaceless %}
+
+                    </div><!-- /.div row -->
+
+                </div><!-- /.div container -->
+
+            </nav>
+
+            <nav id="secondNav">
+
+                <div class="container">
+
+                    <div class="row">
+                        <ul>
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <li>Bienvenue,
+                                <div class="dropdownSystem">
+                                    <strong>{{ app.user.username }}</strong> <span class="glyphicon glyphicon-triangle-bottom"></span>
+
+                                    <ol class="user-menu dropdown-items">
+                                        <li><strong>Leslye Raltir</strong>Maître Jedi</li>
+                                        <li><a href="#">Profil utilisateur</a></li>
+                                        <li><a href="#">Feuille de personnage</a></li>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <li><a href="{{ path('dashboard') }}">Asservir la galaxie</a></li>
+                                        {% endif %}
+                                    </ol>
+                                </div>
+                            </li>
+                        {% endif %}
+                        </ul>
+                        {% if app.request.attributes.get('_route') != 'index' %}
+                            <ul class="arianePath">
+                               <li><a href="{{ path('index') }}">Index</a></li>
+                                {% if app.request.attributes.get('_route') == 'viewforum'
+                                    or app.request.attributes.get('_route') == 'viewtopic'
+                                    or app.request.attributes.get('_route') == 'editpost'
+                                %}
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                    <li><a href="{{ path('viewforum', {'forumId': forumData.id, 'cleanName': forumData.cleanName}) }}">{{ forumData.name }}</a></li>
+                                {% endif %}
+                                {% if app.request.attributes.get('_route') == 'viewtopic'
+                                    or app.request.attributes.get('_route') == 'editpost'
+                                %}
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                    <li><a href="{{ path('viewtopic', {'topicId': topicData.id, 'cleanTitle': topicData.cleanTitle}) }}">{{ topicData.title }}</a></li>
+                                {% endif %}
+                                {% if app.request.attributes.get('_route') == 'viewprofile'
+                                    or app.request.attributes.get('_route') == 'editprofile'
+                                %}
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <li><a href="{{ path('viewprofile', {'userId': userData.id}) }}">{{ pageTitle }}</a></li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </div><!-- /.div row -->
+
+                </div><!-- /.div container -->
+
+            </nav>
+
+            <div class="logo">
+                <a href="{{ path('index') }}"><img src="{{ asset('img/logo.png') }}" alt="Logo" /></a>
+            </div>
+
+        </header>
+
+        {% block body %}{% endblock %}
+
+        <footer>
+
+            <div class="container">
+
+                <div class="row">
+                {% if app.request.attributes.get('_route') != 'index' %}
+                    <ul class="arianePath">
+                       <li><a href="{{ path('index') }}">Index</a></li>
+                        {% if app.request.attributes.get('_route') == 'viewforum'
+                            or app.request.attributes.get('_route') == 'viewtopic'
+                            or app.request.attributes.get('_route') == 'editpost'
+                        %}
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <li><a href="{{ path('viewforum', {'forumId': forumData.id, 'cleanName': forumData.cleanName}) }}">{{ forumData.name }}</a></li>
+                        {% endif %}
+                        {% if app.request.attributes.get('_route') == 'viewtopic'
+                            or app.request.attributes.get('_route') == 'editpost'
+                        %}
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <li><a href="{{ path('viewtopic', {'topicId': topicData.id, 'cleanTitle': topicData.cleanTitle}) }}">{{ topicData.title }}</a></li>
+                        {% endif %}
+                        {% if app.request.attributes.get('_route') == 'viewprofile'
+                            or app.request.attributes.get('_route') == 'editprofile'
+                        %}
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <li><a href="{{ path('viewprofile', {'userId': userData.id}) }}">{{ pageTitle }}</a></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+                </div><!-- /.div row -->
+
+                {% block footer %}{% endblock %}
+
+            </div><!-- /.div container -->
+
+        </footer>
+
+    </body>
+</html>

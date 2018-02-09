@@ -1,0 +1,13 @@
+# This file is auto-generated during the composer install
+
+parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: tales_of_galaxy
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host: localhost
+    mailer_user: team@talesofgalaxy.fr
+    mailer_password: null
+    secret: 3292e26f9586acf7018255dfb2d97b92fc8260a9

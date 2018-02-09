@@ -1,0 +1,15 @@
+viewcharacter:
+    path:     /character-{characterId}
+    defaults: { _controller: ToGRolePlayBundle:Character:viewCharacter }
+    requirements:
+        characterId: '\d+'
+
+editcharacter:
+    path:     /character-{characterId}/edit
+    defaults: { _controller: ToGRolePlayBundle:Character:editCharacter }
+    requirements:
+        characterId: '\d+'
+
+update_avatar_by_ajax:
+    path:     /update/avatar/ajax
+    defaults: { _controller: ToGRolePlayBundle:Character:updateAvatarByAjax }

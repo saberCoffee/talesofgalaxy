@@ -1,0 +1,47 @@
+# Common
+index:
+    path:     /
+    defaults: { _controller: ToGForumBundle:Common:index }
+
+viewforum:
+    path:     /forum-{forumId}/{cleanName}
+    defaults: { _controller: ToGForumBundle:Common:viewForum }
+    requirements:
+        forumId: '\d+'
+
+viewtopic:
+    path:     /topic-{topicId}/{cleanTitle}
+    defaults: { _controller: ToGForumBundle:Common:viewTopic }
+    requirements:
+        topicId: '\d+'
+
+editpost:
+    path:   /posting/post-{postId}
+    defaults: { _controller: ToGForumBundle:Common:editPost }
+
+# Admin
+dashboard:
+    path:     /admin/dashboard
+    defaults: { _controller: ToGForumBundle:Admin:dashboard }
+
+board_config:
+    path:     /admin/board/config
+    defaults: { _controller: ToGForumBundle:Admin:boardConfig }
+
+forums_list:
+    path:     /admin/forums/list
+    defaults: { _controller: ToGForumBundle:Admin:forumsList }
+
+forum_management:
+    path:     /admin/forums/management/forum-{forumId}/{cleanName}
+    defaults: { _controller: ToGForumBundle:Admin:forumManagement }
+    requirements:
+        forumId: '\d+'
+
+users_list:
+    path:     /admin/users/list
+    defaults: { _controller: ToGForumBundle:Admin:usersList }
+
+groups_list:
+    path:     /admin/groups/list
+    defaults: { _controller: ToGForumBundle:Admin:groupsList }

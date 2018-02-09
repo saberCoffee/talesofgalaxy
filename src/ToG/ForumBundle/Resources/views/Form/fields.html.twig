@@ -1,0 +1,115 @@
+{% block form_row %}
+<div class="form-group">
+    {{ form_label(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+</div>
+{% endblock form_row %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+        <div class="error-block">
+            <ul>
+                {% for error in errors %}
+                    <li><span class="glyphicon glyphicon-warning-sign"></span> {{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+{% block _post_text_widget %}
+    {{ form_widget(form, { 'attr': {'class': 'form-control messagebox'} }) }}
+{% endblock %}
+
+{% block _post_character_name_row %}
+<div class="form-group form-demi-margin">
+    {{ form_label(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+    <div class="help-block"><span class="glyphicon glyphicon-info-sign"></span> Correspond au nom qui sera utilisé sur le forum. Vous pouvez mettre votre nom et prénom, ou juste l'un des deux, ou un surnom, ou un titre, etc.</div>
+</div>
+{% endblock %}
+
+{% block _post_character_surname_row %}
+<div class="form-group form-demi">
+    {{ form_label(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+</div>
+{% endblock %}
+
+{% block _post_character_firstname_row %}
+<div class="form-group form-demi-margin">
+    {{ form_label(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+</div>
+{% endblock %}
+
+{% block _post_character_lastname_row %}
+<div class="form-group form-demi">
+    {{ form_label(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+</div>
+{% endblock %}
+
+{% block _post_character_gender_row %}
+<div class="form-group form-demi-margin">
+    {{ form_label(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+</div>
+{% endblock %}
+
+{% block _post_character_species_row %}
+<div class="form-group form-demi">
+    {{ form_label(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+</div>
+{% endblock %}
+
+{% block _post_character_birthdate_row %}
+<div class="form-group form-demi-margin">
+    {{ form_label(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+</div>
+{% endblock %}
+
+{% block _post_character_homeworld_row %}
+<div class="form-group form-demi">
+    {{ form_label(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+</div>
+{% endblock %}
+
+{% block _post_character_rank_row %}
+<div class="form-group form-demi-margin">
+    {{ form_label(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+</div>
+{% endblock %}
+
+{% block _post_character_level_row %}
+<div class="form-group form-demi">
+    {{ form_label(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+</div>
+{% endblock %}
+
+{% block _post_character_physical_row %}
+<div class="form-group form-demi-margin">
+    {{ form_label(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+</div>
+{% endblock %}
+
+{% block _post_character_mental_row %}
+<div class="form-group form-demi">
+    {{ form_label(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+</div>
+{% endblock %}
+
+{#
+{% block _user_avatar_label %}
+    {{ form_label(form, null, {'label_attr': {'class': 'btn-default'}}) }}
+{% endblock %}
+#}

@@ -1,0 +1,165 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% form_theme form 'ToGForumBundle:Form:fields.html.twig' %}
+{{ include('ToGForumBundle:Form:bbcode.html.twig') }}
+
+<main id="page-viewtopic">
+
+    <div class="container">
+
+        <div class="row">
+
+            <header>
+
+                <h2>{{ topicData.title }}</h2>
+                <div class="page-controls">
+                    <!-- <input type="text" placeholder="Rechercher" /> -->
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <a href="#" class="button button-type1" id="postingControl">Répondre</a>
+                    {% endif %}
+                </div>
+
+            </header>
+
+        </div><!-- /.div row -->
+
+        {% for post in posts %}
+            {% if post.character %}
+                {% set character = post.character %}
+                {% set avatar    = character.avatar %}
+                {% if character.gender == 'f' %}
+                    {% set e = 'e' %}
+                {% else %}
+                    {% set e = '' %}
+                {% endif %}
+            {% else %}
+                {% set character = '' %}
+                {% set avatar = post.user.avatar %}
+            {% endif %}
+            <div class="row">
+
+                <div class="body" id="post-{{ post.id }}">
+                    <header
+                    {% if character %}
+                        {% if post.character.group %}
+                            class="faction-{{ post.character.group.abreviation }}-border"
+                        {% else %}
+                            class="faction-default-border"
+                        {% endif %}
+                    {% else %}
+                        {% if post.user.group %}
+                            class="faction-{{ post.user.group.abreviation }}-border"
+                        {% else %}
+                            class="faction-default-border"
+                        {% endif %}
+                    {% endif %}
+                    ">
+                        <div class="avatar">
+                            <a href="{{ path('viewprofile', {'userId': post.user.id}) }}">
+                            {% if avatar %}
+                                {% if character %}
+                                    <img src="{{ asset('uploads/characters/avatars/' ~ avatar) }}" width="150px" height="150px" alt="Avatar de {{ post.user.username }}" class="faction-{{ post.character.group.abreviation }}-border" />
+                                {% else %}
+                                    <img src="{{ asset('uploads/users/avatars/' ~ avatar) }}" width="150px" height="150px" alt="Avatar de {{ post.user.username }}"
+                                    {% if post.user.group %}
+                                        class="faction-{{ post.user.group.abreviation }}-border"
+                                    {% else %}
+                                        class="faction-default-border"
+                                    {% endif %}
+                                    />
+                                {% endif %}
+                            {% else %}
+                                <img src="{{ asset('img/avatars/no_avatar.jpg') }}" width="150px" height="150px" alt="Avatar manquant"
+                                {% if post.user.group %}
+                                    class="faction-{{ post.user.group.abreviation }}-border"
+                                {% else %}
+                                    class="faction-default-border"
+                                {% endif %}
+                                />
+                            {% endif %}
+                            </a>
+                        </div>
+
+                        {% if character %}
+                            <a href="{{ path('viewcharacter', {'characterId': character.id}) }}" class="poster-name
+                            {% if character.group %}
+                            faction-{{ character.group.abreviation }}
+                            {% endif %}
+                            ">{{ character.name }}</a>
+                        {% else %}
+                            <a href="{{ path('viewprofile', {'userId': post.user.id}) }}" class="poster-name
+                            {% if post.user.group %}
+                                faction-{{ post.user.group.abreviation }}
+                            {% else %}
+                                faction-default"
+                            {% endif %}
+                            ">{{ post.user.username }}</a>
+                        {% endif %}
+                    </header>
+
+                    <div class="subHeader">
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <div class="post-controls">
+                                {% if app.user.id == post.user.id %}
+                                    <a href="{{ path('editpost', {'postId': post.id}) }}" title="Modifier ce message"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a title="Supprimer ce message"><span class="glyphicon glyphicon-remove"></span></a>
+                                {% else %}
+                                    <a title="Envoyer un message privé à {{ post.user.username }}"><span class="glyphicon glyphicon-envelope"></span></a>
+                                {% endif %}
+                                <a title="Citer ce message"><span class="glyphicon glyphicon-comment"></span></a>
+                            </div>
+                        {% endif %}
+
+                        <h2>
+                            <a href="{{ path('viewtopic', {'topicId': topicData.id, 'cleanTitle': topicData.cleanTitle}) }}#post-{{ post.id}}">{% if loop.index0 > 0 %}Re: {% endif %}{{ topicData.title }}</a>
+                        </h2>
+                        par {% if character %}<a href="{{ path('viewcharacter', {'characterId': character.id}) }}" class="poster-name{% if character.group %} faction-{{ character.group.abreviation }}{% endif %}">{{ character.name }}</a> ({% endif %}<a href="{{ path('viewprofile', {'userId': post.user.id}) }}" class="poster-name
+                        {% if post.user.group %}
+                            faction-{{ post.user.group.abreviation }}
+                        {% endif %}">{{ post.user.username }}</a>{% if character %}){% endif %}, le {{ post.postDate|localizeddate('full', 'medium', app.request.locale ) }}
+                    </div>
+
+                    <div class="content">
+                        {% if loop.first %}
+                            {% if topicData.forum.name == 'Créer votre personnage' %}
+                                {% if character %}
+                                <strong class="faction-{{ character.group.abreviation }}">Prénom</strong> {{ character.firstname }}<br />
+                                <strong class="faction-{{ character.group.abreviation }}">Nom</strong> {{ character.lastname }}<br />
+                                <strong class="faction-{{ character.group.abreviation }}">Surnom</strong> {{ character.surname }}<br />
+                                <strong class="faction-{{ character.group.abreviation }}">Genre</strong> {% if character.gender == 'f' %}Féminin{% elseif character.gender == 'm' %}Masculin{% else %}Indéfini{% endif %}<br />
+                                <strong class="faction-{{ character.group.abreviation }}">Espèce</strong> {{ character.species }}<br /><br />
+                                <strong class="faction-{{ character.group.abreviation }}">Âge et date de naissance</strong> {{ 220 - character.birthdate}} ans, né{{e}} en {{ character.birthdate }}<br />
+                                <strong class="faction-{{ character.group.abreviation }}">Monde natal</strong> {{ character.homeworld }}<br />
+                                <strong class="faction-{{ character.group.abreviation }}">Groupe</strong> {{ character.group.name }}<br />
+                                <strong class="faction-{{ character.group.abreviation }}">Rang</strong> {{ character.rank }}<br />
+                                <strong class="faction-{{ character.group.abreviation }}">Niveau de personnage</strong> {{ character.level }}<br /><br />
+                                <strong class="faction-{{ character.group.abreviation }}">Description physique</strong><br /><br />{{ character.physical|bbcode|raw|nl2br }}<br /><br />
+                                <strong class="faction-{{ character.group.abreviation }}">Description mentale</strong><br /><br />{{ character.mental|bbcode|raw|nl2br }}<br /><br />
+                                <strong class="faction-{{ character.group.abreviation }}">Histoire</strong><br /><br />
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                        {{ post.text|bbcode|raw|nl2br }}
+                    </div>
+                </div>
+
+            </div><!-- /.div row -->
+        {% endfor %}
+
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <div id="newpost" class="row">
+
+                {{ form_start(form, { 'attr': {'class': 'form-display1'} }) }}
+
+                    {{ form_row(form.text) }}
+
+                {{ form_end(form, { 'attr' : { 'class': 'form-posting-msg' } }) }}
+
+            </div><!-- /.div row -->
+        {% endif %}
+
+    </div><!-- /.div container -->
+
+</main>
+{% endblock %}

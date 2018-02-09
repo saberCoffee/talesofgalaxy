@@ -1,0 +1,132 @@
+@import 'vars.scss';
+
+.bbcodeWrapper {
+    margin-bottom: 0.5em;
+
+    span:not(.glyphicon) {
+        display: inline-block;
+        height: 30px;
+        margin: 5px;
+        padding: 0 7px;
+        background: $main-color;
+        border: 1px solid $black;
+        border-bottom: 2px solid $black;
+
+        color: $black;
+        cursor: pointer;
+        line-height: 27px;
+        font-family: "Electrolize", sans-serif;
+
+        transition: all 0.2s ease-out;
+
+        &:first-of-type {
+            margin-left: 0;
+        }
+
+        &:first-letter {
+            text-transform: uppercase;
+        }
+
+        &.active, &:hover, &:hover select {
+            background: $black;
+            border-color: $yellow;
+            color: $yellow;
+        }
+
+        &:active {
+            border-bottom-width: 1px;
+        }
+    }
+
+    .options {
+        padding: 0;
+
+        select {
+            height: 21px;
+            margin: 0;
+            padding: 0;
+            background: $main-color;
+            border: none;
+            color: $black;
+            box-shadow: none;
+
+            &:focus, &:active {
+                outline: none;
+            }
+        }
+    }
+
+    #colorBlock {
+        display: none;
+
+        #colorpickerHolder {
+            position: relative;
+
+            .glyphicon {
+                cursor: pointer;
+                position: absolute;
+                top: 14px;
+                left: 290px;
+                z-index: 50;
+
+                transition: all 0.3s ease-out;
+
+                &:hover {
+                    color: $yellow;
+                }
+            }
+
+            .colorpicker_hex {
+                top: 11px;
+            }
+
+            input {
+                right: 0px;
+                padding-top: 1px;
+                padding-right: 8px;
+            }
+
+            input:focus, input:active {
+                outline: none;
+            }
+        }
+    }
+}
+
+.bbcode-blockquote {
+    margin: 10px 0;
+    padding: 0;
+    border: none;
+
+    .quoteTitle {
+        position: relative;
+        display: inline-block;
+        height: 45px;
+        padding: 0 20px;
+        background: #131313;
+
+        color: $yellow;
+        font-weight: bold;
+        line-height: 45px;
+        font-size: 1.6rem;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -22px;
+
+            border-left: 22px solid #131313;
+            border-top: 45px solid transparent;
+        }
+    }
+
+    > div {
+        padding: 20px;
+        background: rgba(18,18,18,0.5);
+        border: 1px solid #000;
+        box-shadow: inset 0 0 2px 2px rgba(255,255,255,.05);
+
+        font-size: 1.4rem;
+    }
+}

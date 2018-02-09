@@ -1,0 +1,4 @@
+services:
+#    to_g_forum.example:
+#        class: ToG\ForumBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

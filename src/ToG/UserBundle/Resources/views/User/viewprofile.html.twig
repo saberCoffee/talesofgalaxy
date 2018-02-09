@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<main id="page-viewprofile">
+
+    <div class="container">
+
+        <div class="row">
+
+            <header class="viewprofile-header">
+
+                <h2>{{ pageTitle }}</h2>
+                <div class="page-controls">
+                    <!-- <input type="text" placeholder="Rechercher" /> -->
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        {% if app.user.id == userData.id %}
+                            <a href="{{ path('editprofile', {'userId': userData.id}) }}" class="button button-type1">Modifier votre profil</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+            </header>
+
+        </div><!-- /.div row -->
+
+        <div class="row">
+
+            <div class="body">
+                <header class="border-{{ faction }}">
+                    <div class="avatar">
+                        {% if userData.avatar %}
+                            <img src="{{ asset('uploads/users/avatars/' ~ userData.avatar) }}" width="150px" height="150px" alt="Avatar de {{ userData.username }}" class="border-{{ faction }}" />
+                        {% else %}
+                            <img src="{{ asset('img/avatars/no_avatar.jpg') }}" width="150px" height="150px" alt="Avatar manquant" class="border-{{ faction }}" />
+                        {% endif %}
+                    </div>
+
+                    <span class="poster-name {{ faction }}">{{ userData.username }}</span>
+                </header>
+
+                <div class="content">
+                    Contact l'utilisateur <br />
+                    Inscription <br />
+                    Dernière visite <br />
+                    Nombre total de messages <br />
+                    Forum le plus actif <br />
+                    Sujet le plus actif <br />
+                    <hr >
+                    Personnages : (list) <br />
+                    Personnage le plus actif <br />
+                    Personnage le plus haut niveau <br />
+                    Personnage le plus riche <br />
+                    Personnage avec le plus de relations <br />
+                </div>
+            </div>
+
+        </div><!-- /.div row -->
+
+    </div><!-- /.div container -->
+
+</main>
+{% endblock %}

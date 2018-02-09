@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% form_theme form 'ToGForumBundle:Form:fields.html.twig' %}
+{# {% form_theme form 'ToGForumBundle:Form:fields.html.twig' %} #}
+
+<main id="page-admin">
+
+    <div class="container">
+
+        <div class="row">
+
+            <header class="forum-header">
+
+                <h2 class="forum-title">{{ forumData.name }}</h2>
+
+            </header>
+
+        </div><!-- /.div row -->
+
+        <div class="row">
+
+            {{ form_start(form, { 'attr': {'class': 'form-display1'} }) }}
+
+            {{ form_end(form) }}
+
+        </div><!-- /.div row -->
+
+    </div><!-- /.div container -->
+
+</main>
+{% endblock %}

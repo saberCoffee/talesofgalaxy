@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% form_theme form 'ToGForumBundle:Form:fields.html.twig' %}
+{{ include('ToGForumBundle:Form:bbcode.html.twig') }}
+
+{% javascripts
+    'vendors/jcrop/js/jquery.Jcrop.min.js'
+    'js/character_creation.js'
+    'js/avatar.js'
+    output='js/compiled/app.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+<script type="text/javascript">
+var character_creation_path    = "{{ asset('img/character_creation/groups/') }}";
+var update_avatar_by_ajax_path = "{{ path('update_avatar_by_ajax') }}"
+var temp_path = "{{ asset('uploads/characters/avatars/') }}";
+</script>
+
+<link rel="stylesheet" media="screen" type="text/css" href="{{ asset('vendors/jcrop/css/jquery.Jcrop.min.css') }}" />
+
+<main id="page-viewforum">
+
+    <div class="container">
+
+        <div class="row">
+
+            <header class="forum-header">
+
+                <h2 class="forum-title">{{ forumData.name }}</h2>
+                <div class="page-controls">
+                    <!-- <input type="text" placeholder="Rechercher" /> -->
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <a href="#newtopic" class="button button-type1" id="postingControl"><span class="glyphicon glyphicon-plus"></span>{{ newTopicLabel }}</a>
+                    {% endif %}
+                </div>
+
+            </header>
+
+        </div><!-- /.div row -->
+
+        <div id="newtopic" class="row">
+
+            {{ form_start(form, { 'attr': {'class': 'form-display1', 'id': 'character-creation'} }) }}
+
+                {{ form_row(form.topic.title) }}
+
+                {% if characterCreation %}
+                    <div class="character-creation">
+                        {% spaceless %}
+                        {{ form_row(form.character.name) }}
+                        {{ form_row(form.character.surname) }}
+                        {{ form_row(form.character.firstname) }}
+                        {{ form_row(form.character.lastname) }}
+
+                        <div class="form-group avatarbox">
+                            <img src="{{ asset('img/avatars/no_avatar.jpg') }}" width="150px" height="150px" alt="Avatar manquant" />
+
+                            {{ form_label(form.character.avatar) }} <span class="glyphicon glyphicon-upload label-glyph"></span>
+
+                            <div class="help-block"><span class="glyphicon glyphicon-info-sign"></span> Dimensions minimales : 150px de hauteur, 150px de largeur | Format .JPG</div>
+
+                            {{ form_widget(form.character.avatar, { 'attr': {'class': 'form-control'} }) }}
+
+                            {{ form_errors(form.character.avatar) }}
+                        </div>
+
+                        {{ form_row(form.character.gender) }}
+                        {{ form_row(form.character.species) }}
+                        {{ form_row(form.character.birthdate) }}
+                        {{ form_row(form.character.homeworld) }}
+                        {{ form_row(form.character.group) }}
+                        {{ form_row(form.character.rank) }}
+                        {{ form_row(form.character.level) }}
+                        {{ form_row(form.character.physical) }}
+                        {{ form_row(form.character.mental) }}
+                        <input type="hidden" name="temp_avatar" id="temp_avatar">
+                        {% endspaceless %}
+                    </div>
+                {% endif %}
+
+                {{ form_row(form.text) }}
+
+            {{ form_end(form) }}
+
+        </div><!-- /.div row -->
+
+        <div class="topicrow">
+            {% for topic in topics %}
+                <a href="{{ path('viewtopic', {'topicId': topic.id, 'cleanTitle': topic.cleanTitle}) }}"><div class="row">
+                    <div class="topic-title">
+                        <span class="glyphicon glyphicon-file" aria-hidden="true"></span>{{ topic.title }}
+                    </div>
+                    <div class="topic-responses">
+                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> {{ topic.postsCount }}
+                    </div>
+                    <div class="topic-author">
+                        <strong>{{ topic.firstPosterName }}</strong>
+                    </div>
+                    <div class="topic-date">
+                        {{ topic.lastPostDate|localizeddate('medium', 'none', app.request.locale ) }}
+                    </div>
+                </div></a>
+            {% endfor %}
+        </div>
+
+    </div><!-- /.div container -->
+
+</main>
+{% endblock %}

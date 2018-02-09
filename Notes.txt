@@ -1,0 +1,25 @@
+### Character Model ###
+
+// Identifiant du personnage
+$id;
+$user;
+
+// Infos sur le personnage
+$fullname;
+$surname;
+$gender;
+$species;
+$birthdate;
+$homeworld;
+$rank;
+$quote;
+$alignment;
+
+// Stats du personnage
+$level;
+$health;
+$credits;
+
+// Customisation du personnage
+$avatar;
+($bg);
