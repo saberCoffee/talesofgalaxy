@@ -61,12 +61,36 @@ class CommonController extends Controller
         $forumRepository = $em->getRepository('ToGForumBundle:Forum');
         $categories_and_forums = $forumRepository->hierarchizeForums();
 
+        $groups = $em->getRepository('ToGRolePlayBundle:Group')
+            ->findBy(
+                array(),
+                array('is_not_rp' => 'ASC')
+            );
+
+        foreach ($groups as $group) {
+            $members = [];
+
+            foreach ($group->getUserGroupAssociations() as $assoc) {
+                $user = $assoc->getUser();
+                $members[] = $user;
+            }
+
+            foreach ($group->getCharacters() as $character) {
+                $members[] = $character;
+            }
+
+            $group->setMembers($members);
+        }
+
         return $this->render('ToGForumBundle:Common:index.html.twig', array(
             // Utilisateurs du Qui est en ligne ?
             'usersOnline' => $usersOnline,
 
             // Liste des catégories et leurs forums
             'categories_and_forums' => $categories_and_forums,
+
+            // Liste des groupes
+            'groups' => $groups
         ));
     }
 
@@ -111,7 +135,19 @@ class CommonController extends Controller
 
         // Si on est dans le forum Créer votre personnage, on ajoute le formulaire dédié
         if ($forum->getName() === 'Créer votre personnage') {
-            $form = $this->createForm(PostType::class, $post, array('new_character' => true));
+            $groups = $em->getRepository('ToGRolePlayBundle:Group')
+                ->findBy(
+                    array('is_not_rp' => 0),
+                    array('is_not_rp' => 'ASC')
+                );
+
+            $newGroups = [];
+
+            foreach ($groups as $group) {
+                $newGroups[$group->getId()] = $group;
+            }
+
+            $form = $this->createForm(PostType::class, $post, array('new_character' => true, 'groups' => $newGroups));
             $characterCreation = true;
         } else {
             $form = $this->createForm(PostType::class, $post, array('new_topic' => true));
@@ -146,8 +182,12 @@ class CommonController extends Controller
                     }
                 }
 
+                $groupId = $character->getGroup();
+                $group   = $em->getRepository('ToGRolePlayBundle:Group')->find($groupId);
+
                 $character
                     ->setUser($user)
+                    ->setGroup($group)
                 ;
 
                 if (!empty($_POST['temp_avatar'])) { // si on crop un avatar

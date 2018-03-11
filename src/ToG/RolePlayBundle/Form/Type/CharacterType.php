@@ -19,6 +19,12 @@ class CharacterType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $groups = [];
+        foreach ($options['groups'] as $group) {
+            $groups[$group->getName()] = $group->getId();
+        }
+        $json_group = json_encode($options['groups']);
+
         // 1 à 5 : Novice
         // 6 à 10 : Confirmé
         // 11 à 15 : Expert
@@ -62,6 +68,11 @@ class CharacterType extends AbstractType
             ->add('species', null, array('label' => 'Espèce'))
             ->add('birthdate', null, array('label' => 'Année de naissance'))
             ->add('homeworld', null, array('label' => 'Monde natal'))
+            ->add('group', ChoiceType::class, array(
+                'label' => 'Groupe',
+                'choices' => $groups,
+                'attr' => array('style' => 'width:300px', 'data-value' => $json_group),
+            ))
             ->add('rank', null, array('label' => 'Rang'))
             ->add('level', ChoiceType::class, array(
                 'label' => 'Niveau de personnage',
@@ -75,7 +86,8 @@ class CharacterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Character::class
+            'data_class' => Character::class,
+            'groups' => null
         ));
     }
 }

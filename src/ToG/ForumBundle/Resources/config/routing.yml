@@ -41,3 +41,7 @@ forum_management:
 users_list:
     path:     /admin/users/list
     defaults: { _controller: ToGForumBundle:Admin:usersList }
+
+groups_list:
+    path:     /admin/groups/list
+    defaults: { _controller: ToGForumBundle:Admin:groupsList }
