@@ -185,18 +185,18 @@
         min-height: 125px;
     }
 
-    .form-demi, .form-demi-margin {
+    .form-demi {
         display: inline-block;
-        width: 48%;
+        width: 49%;
         vertical-align: top;
+
+        &:first-of-type {
+            margin-right: 2%;
+        }
     }
 
     .help-block {
         margin-top: 5px;
-    }
-
-    .form-demi-margin {
-        margin-right: 4%;
     }
 
     .highlighted {

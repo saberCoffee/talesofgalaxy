@@ -1,0 +1,168 @@
+{
+  "avatar": {
+    "config": {
+      "type": "image",
+      "error": {
+        "badFormat": "Votre avatar doit être au format .jpg ou .png",
+        "maxSize": "Votre avatar ne doit pas excéder 80ko",
+        "minWidth": "Votre avatar doit faire au moins 150px de largeur",
+        "minHeight": "Votre avatar doit faire au moins 150px de hauteur"
+      },
+      "ratio": 1,
+      "minHeight": 150,
+      "maxHeight": 150
+    },
+    "data": {
+      "currentValue": "",
+      "hasError": false
+    }
+  },
+  "firstname": {
+    "config": {
+      "type" : "text",
+      "label": "Prénom",
+      "error": {
+        "minLength": "Le prénom doit au moins faire deux caractères",
+        "maxLength": "Le prénom ne peut pas faire plus de 100 caractères"
+      },
+      "inlineBlock": true,
+      "minLength": 2,
+      "maxlength": 100
+    },
+    "data": {
+      "initiValue": "",
+      "currentValue": "",
+      "hasError": false
+    }
+  },
+  "lastname": {
+    "config": {
+      "type" : "text",
+      "label": "Nom de famille",
+      "error": {
+        "minLength": "Le nom de famille doit au moins faire deux caractères",
+        "maxLength": "Le nom de famille ne peut pas faire plus de 100 caractères"
+      },
+      "inlineBlock": true,
+      "minLength": 2,
+      "maxlength": 100
+    },
+    "data": {
+      "initiValue": "",
+      "currentValue": "",
+      "hasError": false
+    }    
+  },
+  "realname": {
+    "config": {
+      "type" : "text",
+      "label": "Nom affiché",
+      "info": "Le nom qui sera affiché sur le forum. Vous pouvez mettre votre nom et prénom, ou juste l'un des deux, ou un surnom, ou un titre, etc.",
+      "error": {
+        "minLength": "Le nom affiché doit au moins faire deux caractères",
+        "maxLength": "Le nom affiché ne peut pas faire plus de 100 caractères",
+        "mandatory": "Ce champ est obligatoire"
+      },
+      "inlineBlock": true,
+      "minLength": 2,
+      "maxlength": 100,
+      "mandatory": true
+    },
+    "data": {
+      "initiValue": "",
+      "currentValue": "",
+      "hasError": false
+    }
+  },
+  "surname": {
+    "config": {
+      "type" : "text",
+      "label": "Surnom",
+      "error": {
+        "minLength": "Le surnom doit au moins faire deux caractères",
+        "maxLength": "Le surnom ne peut pas faire plus de 100 caractères"
+      },
+      "inlineBlock": true,
+      "minLength": 2,
+      "maxlength": 100
+    },
+    "data": {
+      "initiValue": "",
+      "currentValue": "",
+      "hasError": false
+    }
+  },
+  "gender": {
+    "config": {
+      "type" : "select",
+      "label": "Genre",
+      "error": {
+        "mandatory": "Ce champ est obligatoire"
+      },
+      "mandatory": true,
+      "inlineBlock": true,
+      "minLength": 2,
+      "maxlength": 100
+    },
+    "data": {
+      "options": [
+        {
+          "value": "m",
+          "label": "Masculin"
+        },
+        {
+          "value": "f",
+          "label": "Féminin"
+        },
+        {
+          "value": "n",
+          "label": "Indéfini"
+        }
+      ],
+      "initiValue": "",
+      "currentValue": "",
+      "hasError": false
+    }
+  },
+  "species": {
+    "config": {
+      "type" : "text",
+      "label": "Espèce",
+      "error": {
+        "minLength": "Le nom de l'espèce doit au moins faire deux caractères",
+        "maxLength": "Le nom de l'espèce ne peut pas faire plus de 100 caractères, mais en même temps si vous voyez cette erreur c'est que vous avez renseigné une espèce qui n'existe pas",
+        "mandatory": "Ce champ est obligatoire"
+      },
+      "inlineBlock": true,
+      "minLength": 2,
+      "maxlength": 100,
+      "mandatory": true
+    },
+    "data": {
+      "initiValue": "",
+      "currentValue": "",
+      "hasError": false
+    }
+  },  
+  "birthdate": {
+    "config": {
+      "type" : "text",
+      "label": "Date de naissance",
+      "error": {
+        "maxValue": "La date de naissance ne peut pas être supérieure à la date actuelle du jeu, à moins que vous ne soyiez un voyageur temporel",
+        "regex": "La date de naissance doit être constituée exclusivement de chiffres",
+        "mandatory": "Ce champ est obligatoire"
+      },
+      "inlineBlock": true,
+      "minLength": 2,
+      "maxValue": "rp::currentDate",
+      "regex": "^[0-9]*$",
+      "mandatory": true
+    },
+    "data": {
+      "initiValue": "",
+      "currentValue": "",
+      "hasError": false
+    }
+  }
+}

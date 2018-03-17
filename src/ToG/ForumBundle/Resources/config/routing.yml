@@ -18,6 +18,8 @@ viewtopic:
 editpost:
     path:   /editer/message-{postId}
     defaults: { _controller: ToGForumBundle:Common:editPost }
+    requirements:
+        postId: '\d+'
 
 # Admin
 dashboard:
