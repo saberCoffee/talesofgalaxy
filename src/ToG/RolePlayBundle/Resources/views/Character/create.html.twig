@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block javascripts %}
+<script type="text/javascript">
+var get_rp_infos_by_ajax_path = "{{ path('get_rp_infos_by_ajax') }}"
+</script>
 <script type="text/javascript" src="{{ asset('modules/character_creation/main.js') }}"></script>
 {% endblock %}
 

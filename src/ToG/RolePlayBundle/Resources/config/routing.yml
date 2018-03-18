@@ -17,3 +17,7 @@ editcharacter:
 update_avatar_by_ajax:
     path:     /update/avatar/ajax
     defaults: { _controller: ToGRolePlayBundle:Character:updateAvatarByAjax }
+
+get_rp_infos_by_ajax:
+    path:     /rp/infos/ajax
+    defaults: { _controller: ToGRolePlayBundle:Default:getRPInfosByAjax }

@@ -1,6 +1,7 @@
 {
   "avatar": {
     "config": {
+      "id": "avatar",
       "type": "image",
       "error": {
         "badFormat": "Votre avatar doit être au format .jpg ou .png",
@@ -19,6 +20,7 @@
   },
   "firstname": {
     "config": {
+      "id": "firstname",
       "type" : "text",
       "label": "Prénom",
       "error": {
@@ -37,6 +39,7 @@
   },
   "lastname": {
     "config": {
+      "id": "lastname",
       "type" : "text",
       "label": "Nom de famille",
       "error": {
@@ -55,6 +58,7 @@
   },
   "realname": {
     "config": {
+      "id": "realname",
       "type" : "text",
       "label": "Nom affiché",
       "info": "Le nom qui sera affiché sur le forum. Vous pouvez mettre votre nom et prénom, ou juste l'un des deux, ou un surnom, ou un titre, etc.",
@@ -76,6 +80,7 @@
   },
   "surname": {
     "config": {
+      "id": "surname",
       "type" : "text",
       "label": "Surnom",
       "error": {
@@ -94,6 +99,7 @@
   },
   "gender": {
     "config": {
+      "id": "gender",
       "type" : "select",
       "label": "Genre",
       "error": {
@@ -126,8 +132,10 @@
   },
   "species": {
     "config": {
+      "id": "species",
       "type" : "text",
       "label": "Espèce",
+      "info": "Certaines espèces particulières (la race de Yoda, les Sith au sang pur, ...) sont ne sont jouables qu'avec l'accord du staff. En cas de doute, n'hésitez pas à nous poser la question avant de commencer votre histoire.",
       "error": {
         "minLength": "Le nom de l'espèce doit au moins faire deux caractères",
         "maxLength": "Le nom de l'espèce ne peut pas faire plus de 100 caractères, mais en même temps si vous voyez cette erreur c'est que vous avez renseigné une espèce qui n'existe pas",
@@ -146,6 +154,7 @@
   },  
   "birthdate": {
     "config": {
+      "id": "birthdate",
       "type" : "text",
       "label": "Date de naissance",
       "error": {
@@ -155,8 +164,9 @@
       },
       "inlineBlock": true,
       "minLength": 2,
-      "maxValue": "rp::currentDate",
-      "regex": "^[0-9]*$",
+      "maxValue": "currentDate",
+      "linkTo": "currentDate",
+      "regex": "^[+\\-]?\\d*$",
       "mandatory": true
     },
     "data": {
