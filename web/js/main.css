@@ -1,0 +1,33 @@
+html {
+  font-size: 62.5%; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #131313;
+  background-image: url("./public/img/main_bg.jpg");
+  background-repeat: no-repeat;
+  background-position: 75% -50%;
+  background-attachment: fixed;
+  color: #b3b3b3;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.4rem; }
+.Header__root___2Hs9c nav {
+  height: 50px;
+  margin: 0 auto;
+  background: rgba(42, 42, 42, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  z-index: 99; }
+.App__App___2lfiV {
+  position: relative;
+  width: 992px;
+  height: auto;
+  margin: 0 auto;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+  .App__App___2lfiV * {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box; }
+
+/*# sourceMappingURL=main.css.map*/
