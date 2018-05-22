@@ -3,7 +3,7 @@ tales_of_galaxy
 
 ## Pourquoi Symfony
 
-Après 5 ans sur phpBB, j'ai décidé de passer sur Symfony afin d'avoir vraiment la main sur mon projet. C'était à la fois l'occasion de tester un framework éprouvé et validé par la communauté PHP, et de lettre à jour mon forum viellissant.
+Après 5 ans sur phpBB, j'ai décidé de passer sur Symfony afin d'avoir vraiment la main sur mon projet. C'était à la fois l'occasion de tester un framework éprouvé et validé par la communauté PHP, et de mettre à jour mon forum viellissant.
 
 ## Bundles et technologies employées :
 
@@ -33,6 +33,8 @@ On peut :
 * Créer des forums et des sous-forums à l'infini, via une interface admin sécurisée
 * Ouvrir des sujets dans ces forums
 * Poster des messages dans ces sujets
+
+## Fonctionnalités à implémenter
 
 ## Améliorations et prochaines étapes
 

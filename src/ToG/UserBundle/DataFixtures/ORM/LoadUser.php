@@ -24,7 +24,7 @@ class LoadUser implements FixtureInterface, ContainerAwareInterface, OrderedFixt
     public function load(ObjectManager $manager)
     {
         // Les noms d'utilisateurs à créer
-        $listNames = array('L\'Observateur', 'Asuka', 'Zarga', 'Pravuil', 'Raltir', 'SpicyShark', 'Xander');
+        $listNames = ['L\'Observateur', 'Asuka', 'Zarga', 'Pravuil', 'Raltir', 'SpicyShark', 'Xander'];
 
         foreach ($listNames as $name) {
             // On crée l'utilisateur
@@ -40,10 +40,10 @@ class LoadUser implements FixtureInterface, ContainerAwareInterface, OrderedFixt
             $user->setPassword($password);
 
             // On définit uniquement le role ROLE_USER qui est le role de base
-            $user->setRoles(array('ROLE_USER'));
+            $user->setRoles(['ROLE_USER']);
 
             if ($name === 'L\'Observateur') {
-                $user->setRoles(array('ROLE_USER', 'ROLE_GM', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN'));
+                $user->setRoles(['ROLE_USER', 'ROLE_GM', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN']);
             }
 
             $newDate = new \DateTime('now');
