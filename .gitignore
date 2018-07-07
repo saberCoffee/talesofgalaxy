@@ -4,6 +4,7 @@
 
 # Modules JS
 /__modules/*
+/node_modules/*
 
 # Cache and logs (Symfony2)
 /app/cache/*

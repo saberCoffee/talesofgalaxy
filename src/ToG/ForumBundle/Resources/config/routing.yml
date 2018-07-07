@@ -21,6 +21,10 @@ editpost:
     requirements:
         postId: '\d+'
 
+get_forums_and_categories_api:
+    path:   /api_/forums-and-categories
+    defaults: { _controller: ToGForumBundle:Common:getForumsAndCategoriesAPI }
+
 # Admin
 dashboard:
     path:     /admin/dashboard

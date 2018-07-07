@@ -1,0 +1,38 @@
+{
+  "name": "talesofgalaxy",
+  "version": "1.0.0",
+  "description": "tales_of_galaxy ===============",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "vue": "^2.5.16",
+    "vue-template-compiler": "^2.5.16"
+  },
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.20.1",
+    "autoprefixer": "^8.6.2",
+    "node-sass": "^4.9.0",
+    "postcss-loader": "^2.1.5",
+    "sass-loader": "^7.0.3",
+    "vue-loader": "^14.2.2",
+    "webpack-notifier": "^1.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "assets:serve": "./node_modules/.bin/encore dev-server --hot",
+    "assets:dev": "encore dev --watch",
+    "assets:build": "encore production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saberCoffee/talesofgalaxy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saberCoffee/talesofgalaxy/issues"
+  },
+  "homepage": "https://github.com/saberCoffee/talesofgalaxy#readme"
+}

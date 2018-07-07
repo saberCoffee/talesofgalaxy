@@ -530,10 +530,10 @@ class User implements UserInterface, \Serializable
      *
      * @return int
      */
-    public function getCharactersCount()
-    {
-        return $this->characters_count;
-    }
+    // public function getCharactersCount()
+    // {
+    //     return $this->characters_count;
+    // }
 
     /**
      * Set activeGroup

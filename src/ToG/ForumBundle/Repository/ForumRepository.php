@@ -16,7 +16,7 @@ class ForumRepository extends \Doctrine\ORM\EntityRepository
 
         if (isset($id)) {
             $queryBuilder->where('u.id != :identifier')
-               ->setParameter('identifier', $id);
+                ->setParameter('identifier', $id);
         } else {
             $queryBuilder->where('u.type = 0');
         }
@@ -41,16 +41,16 @@ class ForumRepository extends \Doctrine\ORM\EntityRepository
 
         // Afin de pouvoir les afficher correctement dans la Vue, on va ranger les sous-forums dans leurs parents
         // Pour commencer, on sépare les catégories dans un array qui leur est propre
-        $toUnset    = [];
+        $toUnset = [];
         $categories = [];
         foreach ($categories_and_forums as $index => $child) {
-             if ($child->getParentId()) {
-                 $toUnset[$index] = true;
+            if ($child->getParentId()) {
+                $toUnset[$index] = true;
 
-                 $subForums   = $categories_and_forums[$child->getParentId()]->getSubForums();
-                 $subForums[] = $child;
+                $subForums = $categories_and_forums[$child->getParentId()]->getSubForums();
+                $subForums[] = $child;
 
-                 $categories_and_forums[$child->getParentId()]->setSubForums($subForums);
+                $categories_and_forums[$child->getParentId()]->setSubForums($subForums);
             }
         }
 

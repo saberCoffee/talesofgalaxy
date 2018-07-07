@@ -2,7 +2,15 @@
 
 namespace ToG\ForumBundle\Entity;
 
+
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+
 use Doctrine\ORM\Mapping as ORM;
+
 use ToG\ForumBundle\Utility\Utility;
 
 /**
@@ -341,5 +349,16 @@ class Forum
         $this->posts_count++;
 
         return $this;
+    }   
+
+    public function serialize()
+    {        
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setIgnoredAttributes(['topics']);
+
+        $serializer = new Serializer([$normalizer], [$encoder]);
+
+        return $serializer->serialize($this, 'json');
     }
 }

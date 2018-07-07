@@ -2,10 +2,9 @@
 
 namespace ToG\ForumBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use ToG\ForumBundle\Entity\Post;
 use ToG\ForumBundle\Entity\Topic;
 use ToG\ForumBundle\Form\Type\PostType;
@@ -53,8 +52,7 @@ class CommonController extends Controller
         $usersRepository = $this->getDoctrine()->getRepository('ToGUserBundle:User');
         $usersOnline = $usersRepository->findUsersOnline();
 
-        foreach ($usersOnline as $user)
-        {
+        foreach ($usersOnline as $user) {
             dump($user);
         }
 
@@ -90,7 +88,7 @@ class CommonController extends Controller
             'categories_and_forums' => $categories_and_forums,
 
             // Liste des groupes
-            'groups' => $groups
+            'groups' => $groups,
         ));
     }
 
@@ -122,14 +120,14 @@ class CommonController extends Controller
             $posts = $topic->getPosts();
             $posts_count = 0;
 
-            foreach($posts as $post) {
+            foreach ($posts as $post) {
                 $posts_count++;
             }
 
             $topic->setPostsCount($posts_count);
         }
 
-        $post  = new Post();
+        $post = new Post();
         $topic = new Topic();
         $character = new Character();
 
@@ -169,7 +167,7 @@ class CommonController extends Controller
                     $avatar_directory = $this->container->getParameter('characters_avatars_directory');
 
                     $avatar = $character->getAvatar();
-                    $avatarName  = $this->get('app.characters_avatar_uploader')->upload($avatar); // on upload temporairement le nouvel avatar
+                    $avatarName = $this->get('app.characters_avatar_uploader')->upload($avatar); // on upload temporairement le nouvel avatar
                     $avatarInfos = getimagesize($avatar_directory . '/' . $avatarName); // on récupère ses informations
 
                     // si ses dimensions ne sont pas correctes, alors on considère l'upload échoué et on supprime l'avatar
@@ -183,7 +181,7 @@ class CommonController extends Controller
                 }
 
                 $groupId = $character->getGroup();
-                $group   = $em->getRepository('ToGRolePlayBundle:Group')->find($groupId);
+                $group = $em->getRepository('ToGRolePlayBundle:Group')->find($groupId);
 
                 $character
                     ->setUser($user)
@@ -246,9 +244,9 @@ class CommonController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('viewtopic', array(
-                'topicId'    => $topic->getId(),
+                'topicId' => $topic->getId(),
                 'cleanTitle' => $topic->getCleanTitle(),
-                '_fragment'  => 'post-' . $post->getId()
+                '_fragment' => 'post-' . $post->getId(),
             ));
         }
 
@@ -257,7 +255,7 @@ class CommonController extends Controller
             'pageTitle' => $forum->getName(),
 
             // Données du forum visionné
-            'forumData'     => $forum,
+            'forumData' => $forum,
             'newTopicLabel' => ($forum->getName() === 'Créer votre personnage') ? 'Créer un personnage' : 'Ouvrir un sujet',
 
             // Liste des sujets du forum visionné
@@ -267,7 +265,7 @@ class CommonController extends Controller
             'form' => $form->createView(),
 
             // Misc
-            'characterCreation' => (isset($characterCreation)) ? true : false
+            'characterCreation' => (isset($characterCreation)) ? true : false,
         ));
     }
 
@@ -336,9 +334,9 @@ class CommonController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('viewtopic', array(
-                'topicId'    => $topic->getId(),
+                'topicId' => $topic->getId(),
                 'cleanTitle' => $topic->getCleanTitle(),
-                '_fragment'  => 'post-' . $post->getId()
+                '_fragment' => 'post-' . $post->getId(),
             ));
         }
         //
@@ -406,9 +404,9 @@ class CommonController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('viewtopic', array(
-                'topicId'    => $topic->getId(),
+                'topicId' => $topic->getId(),
                 'cleanTitle' => $topic->getCleanTitle(),
-                '_fragment'  => 'post-' . $postId
+                '_fragment' => 'post-' . $postId,
             ));
         }
 
@@ -426,7 +424,22 @@ class CommonController extends Controller
             'forumData' => $forum,
 
             // Données du sujet où on poste
-            'topicData' => $topic
+            'topicData' => $topic,
         ));
+    }
+
+    public function getForumsAndCategoriesAPIAction()
+    {
+        $em = $this->getDoctrine();
+
+        $forumsAsJson = [];
+
+        $forums = $em->getRepository('ToGForumBundle:Forum')->findAll();    
+
+        foreach ($forums as $forum) {
+            $forumsAsJson[] = $forum->serialize();
+        }
+        
+        return new JsonResponse($forumsAsJson);
     }
 }

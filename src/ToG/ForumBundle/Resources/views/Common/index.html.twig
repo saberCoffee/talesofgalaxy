@@ -1,96 +1,93 @@
 {% extends 'base.html.twig' %}
 
+{% block javascript %}
+{{ dump(categories_and_forums) }}
+{% endblock %}
+
 {% block body %}
 <main id="page-index">
 
-    <div class="container">
-
-            {% for categorie in categories_and_forums %}
-
-                    <div class="row forumsrow">
-
-                        <h2 class="cat-title" id="category_{{ categorie.cleanName }}">{{ categorie.name }}</h2>
-
-                        {% for forum in categorie.subForums %}
-                            <div class="col-lg-4 r-p">
-
-                                <div class="forum" data-href="{{ path('viewforum', {'forumId': forum.id, 'cleanName': forum.cleanName}) }}">
-                                    <img src="{{ asset('img/ico_forums/ico_' ~ forum.cleanName ~ '.png') }}" class="forum-ico" />
-                                    <div class="forum-desc">
-                                        <h3><a href="{{ path('viewforum', {'forumId': forum.id, 'cleanName': forum.cleanName}) }}">{{ forum.name }}</a></h3>
-                                        <div class="desc">{{ forum.description }}</div>
-                                    </div>
-
-                                    <div class="stats">
-                                        <div>Sujets : <strong>{{ forum.topicsCount }}</strong></div>
-                                        <div>Messages : <strong>{{ forum.postsCount }}</strong></div>
-
-                                        {% if forum.subForums %}
-                                            <div class="showSubForums">
-                                                Sous forums : <strong>{{ forum.subForums|length }}</strong> <span class="glyphicon glyphicon-triangle-bottom"></span>
-                                                <ol class="subForums">
-                                                    <li><strong>{{ forum.name }}</strong> Sous-forums</li>
-                                                {% for forum in forum.subForums %}
-                                                    <li><a href="{{ path('viewforum', {'forumId': forum.id, 'cleanName': forum.cleanName}) }}">{{ forum.name }}</a></li>
-                                                {% endfor %}
-                                            </ol>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                </div><!-- /.div forum -->
-
-                            </div><!-- /.div col -->
-                        {% else %}
-                            <p>Cette catégorie n'a pas encore de forums.</p>
-                        {% endfor %}
-
-                    </div><!-- /.div row -->
-
-            {% endfor %}
-
-    </div><!-- /.div container -->
+  <div id="index-root" data-categories-and-forums={{ categories_and_forums|json_encode() }}>
+    <forum-list></forum-list>
+  </div>
 
 </main>
-{% endblock %}
+{% endblock %} 
 
 {% block footer %}
 <div class="row">
 
-    <div class="whosonline">
+  <div class="whosonline">
 
-        <h2>Qui est en ligne ?</h2>
+    <h2>Qui est en ligne ?</h2>
 
-        <p>
-            {% if usersOnline|length %}
-                Au total, il y a {{ usersOnline|length }} utilisateur{% if usersOnline|length > 1 %}s{% endif %} en ligne :
-                <ul>
-                {% for user in usersOnline %}
-                    <li><a href="" style="color: #B25D3B"><strong>{{ user.username }}</strong></a>{% if loop.last == false %}, {% endif %}</li>
-                {% endfor %}, <li><a href="" style="color: #ec6216"><strong>Davoss (Placeholder)</strong></a></li>, <li><a href="" style="color: #1675B7"><strong>Raltir (Placeholder)</strong></a></li>, <li><a href="" style="color: #1675B7"><strong>Hana (Placeholder)</strong></a></li>, <li><a href="" style="color: #e90707"><strong>Andhar (Placeholder)</strong></a></li>, <li><a href="" style="color: #7C7C7C"><strong>Gilad (Placeholder)</strong></a></li>, <li><a href="" style="color: #624079"><strong>Ghent (Placeholder)</strong></a></li>                
-                </ul>
-            {% else %}
-                Il n'y a aucun utilisateur connecté actuellement.
-            {% endif %}
-        </p>
+    <p>
+      {% if usersOnline|length %} Au total, il y a {{ usersOnline|length }} utilisateur{% if usersOnline|length > 1 %}s{% endif
+      %} en ligne :
+      <ul>
+        {% for user in usersOnline %}
+        <li>
+          <a href="" style="color: #B25D3B">
+            <strong>{{ user.username }}</strong>
+          </a>{% if loop.last == false %}, {% endif %}</li>
+        {% endfor %},
+        <li>
+          <a href="" style="color: #ec6216">
+            <strong>Davoss (Placeholder)</strong>
+          </a>
+        </li>,
+        <li>
+          <a href="" style="color: #1675B7">
+            <strong>Raltir (Placeholder)</strong>
+          </a>
+        </li>,
+        <li>
+          <a href="" style="color: #1675B7">
+            <strong>Hana (Placeholder)</strong>
+          </a>
+        </li>,
+        <li>
+          <a href="" style="color: #e90707">
+            <strong>Andhar (Placeholder)</strong>
+          </a>
+        </li>,
+        <li>
+          <a href="" style="color: #7C7C7C">
+            <strong>Gilad (Placeholder)</strong>
+          </a>
+        </li>,
+        <li>
+          <a href="" style="color: #624079">
+            <strong>Ghent (Placeholder)</strong>
+          </a>
+        </li>
+      </ul>
+      {% else %} Il n'y a aucun utilisateur connecté actuellement. {% endif %}
+    </p>
 
-    </div>
+  </div>
 
-</div><!-- /.div row -->
+</div>
+<!-- /.div row -->
 
 <div class="row">
 
-    <div class="legend">
+  <div class="legend">
 
-        <ul>
-            {% for group in groups %}
-                <li class="faction-{{ group.abreviation }}-border-hover">
-                    <a href="#" style="color: #{{ group.colour }}"><strong>{{ group.name }}</strong></a>
-                    ({{ group.members|length }})
-                </li>
-            {% endfor %}
-        </ul>
+    <ul>
+      {% for group in groups %}
+      <li class="faction-{{ group.abreviation }}-border-hover">
+        <a href="#" style="color: #{{ group.colour }}">
+          <strong>{{ group.name }}</strong>
+        </a>
+        ({{ group.members|length }})
+      </li>
+      {% endfor %}
+    </ul>
 
-    </div><!-- ./div legend -->
+  </div>
+  <!-- ./div legend -->
 
-</div><!-- /.div row -->
+</div>
+<!-- /.div row -->
 {% endblock %}
