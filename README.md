@@ -3,7 +3,7 @@ tales_of_galaxy
 
 ## Pourquoi Symfony
 
-Après 5 ans sur phpBB, j'ai décidé de passer sur Symfony afin d'avoir vraiment la main sur mon projet. C'était à la fois l'occasion de tester un framework éprouvé et validé par la communauté PHP, et de lettre à jour mon forum viellissant.
+Après 5 ans sur phpBB, j'ai décidé de passer sur Symfony afin d'avoir vraiment la main sur mon projet. C'était à la fois l'occasion de tester un framework éprouvé et validé par la communauté PHP, et de mettre à jour mon forum viellissant.
 
 ## Bundles et technologies employées :
 
@@ -33,6 +33,23 @@ On peut :
 * Créer des forums et des sous-forums à l'infini, via une interface admin sécurisée
 * Ouvrir des sujets dans ces forums
 * Poster des messages dans ces sujets
+* Créer un personnage
+
+## Fonctionnalités à implémenter
+
+Voici les fonctionnalités qui restent à implémenter :  
+
+* Gérer les permissions des membres et des forums
+* Modifier son profil membre
+* Modifier son personnage
+* Prévisualiser son message avant de poster
+* Pouvoir enregistrer un brouillon de son message
+* Système de niveaux, compétences et talents pour les personnages
+* Système de jets de dés
+* Système de création de campagnes
+* Système de messagerie privée
+* Système de chat (peut-être remplacé par Discord)
+* Etc...
 
 ## Améliorations et prochaines étapes
 

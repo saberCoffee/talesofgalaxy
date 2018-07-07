@@ -160,7 +160,7 @@ class CommonController extends Controller
 
             $post = $form->getData();
 
-            if ($characterCreation) {
+            if (isset($characterCreation) && $characterCreation) {
                 $character = $post->getCharacter();
 
                 if (!empty($character->getAvatar())) {
